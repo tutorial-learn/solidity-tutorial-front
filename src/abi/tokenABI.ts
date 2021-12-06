@@ -13,6 +13,11 @@ const tokenABI: AbiItem[] = [
         name: "symbol",
         type: "string",
       },
+      {
+        internalType: "address",
+        name: "_owner",
+        type: "address",
+      },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -40,25 +45,6 @@ const tokenABI: AbiItem[] = [
       },
     ],
     name: "Approval",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
     type: "event",
   },
   {
@@ -165,6 +151,11 @@ const tokenABI: AbiItem[] = [
         name: "value",
         type: "uint256",
       },
+      {
+        internalType: "address",
+        name: "_owner",
+        type: "address",
+      },
     ],
     name: "burn",
     outputs: [],
@@ -244,6 +235,11 @@ const tokenABI: AbiItem[] = [
         name: "value",
         type: "uint256",
       },
+      {
+        internalType: "address",
+        name: "_owner",
+        type: "address",
+      },
     ],
     name: "mint",
     outputs: [],
@@ -261,26 +257,6 @@ const tokenABI: AbiItem[] = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -359,19 +335,6 @@ const tokenABI: AbiItem[] = [
         type: "bool",
       },
     ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
-    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },

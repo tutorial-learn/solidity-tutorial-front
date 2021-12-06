@@ -61,7 +61,7 @@ export default function Todo() {
   const onMint = () => {
     if (Number(mintAmountInput.value) <= 0 || !isOwner) return;
     tokenContract.methods
-      .mint(mintToInput.value, toWei(mintAmountInput.value, "ether"))
+      .mint(mintToInput.value, toWei(mintAmountInput.value, "ether"), account)
       .send({ from: account });
   };
 
