@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Sign from "./templates/Sign";
+import Main from "./templates/Main";
+import { useCheckSignIn } from "./contexts/CheckSignInProvider";
+import useEaggerConnect from "./hooks/useEaggerConnect";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { isLoggedIn } = useCheckSignIn();
+
+  useEaggerConnect();
+
+  if (isLoggedIn) return <Main />;
+
+  return <Sign />;
 }
 
 export default App;
