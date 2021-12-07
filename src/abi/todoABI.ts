@@ -8,6 +8,11 @@ const helloWorld: AbiItem[] = [
         name: "_owner",
         type: "address",
       },
+      {
+        internalType: "address",
+        name: "_todoCoinAddr",
+        type: "address",
+      },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -173,11 +178,6 @@ const helloWorld: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_tokenAddress",
-        type: "address",
-      },
-      {
         internalType: "uint256",
         name: "_todoId",
         type: "uint256",
@@ -229,34 +229,6 @@ const helloWorld: AbiItem[] = [
   },
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_tokenAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_todoId",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-    ],
-    name: "withdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_tokenAddress",
-        type: "address",
-      },
       {
         internalType: "uint256",
         name: "_amount",

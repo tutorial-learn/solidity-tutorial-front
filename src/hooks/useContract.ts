@@ -5,7 +5,7 @@ import todoABI from "../abi/todoABI";
 import tokenABI from "../abi/tokenABI";
 
 export const CONTRACT_ADDRESS = process.env.REACT_APP_TODO_ADDRESS;
-export const TOKEN_ADDRESS = process.env.REACT_APP_TODO_TOKEN;
+const TOKEN_ADDRESS = process.env.REACT_APP_TODO_TOKEN;
 
 export default function useContract() {
   const { account, library } = useWeb3React();

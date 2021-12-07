@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { toWei, fromWei } from "web3-utils";
 import { ethers } from "ethers";
 import useChangePerceive from "../hooks/useChangePerceive";
-import useContract, {
-  CONTRACT_ADDRESS,
-  TOKEN_ADDRESS,
-} from "../hooks/useContract";
+import useContract, { CONTRACT_ADDRESS } from "../hooks/useContract";
 import useInput from "../hooks/useInput";
 import ListItem from "./ListItem";
 import { toast } from "react-toastify";
@@ -21,7 +18,7 @@ export interface TodosS {
   finishTime: string;
 }
 
-export default function Todo() {
+export default function Todo({ isJoin }: any) {
   const { contract, tokenContract, account } = useContract();
   const masterInput = useInput();
   const mainInput = useInput();
@@ -52,7 +49,7 @@ export default function Todo() {
       return;
 
     contract.methods
-      .write(TOKEN_ADDRESS, toWei(depositInput.value, "ether"), mainInput.value)
+      .write(toWei(depositInput.value, "ether"), mainInput.value)
       .send({ from: account });
     mainInput.setValue("");
     depositInput.setValue("");
@@ -66,14 +63,21 @@ export default function Todo() {
   };
 
   const getPermission = async () => {
+    // 마스터 권한이 있는지
     const checkOfMaster = await contract.methods
       .isMaster()
       .call({ from: account });
+    // 스마트 계약 작성자인지
     const checkOfOwner = await contract.methods
       .isOwner()
       .call({ from: account });
+    // spender(주소)에서 토근사용을 허가한 owner(함수 호출자)인지
+    const checkApprove = await tokenContract.methods
+      .allowance(account, CONTRACT_ADDRESS)
+      .call();
     setIsMaster(checkOfMaster);
     setIsOwner(checkOfOwner);
+    setIsApprove(checkApprove > 0);
   };
 
   const setPermission = (type: "set" | "unset") => {
@@ -83,7 +87,12 @@ export default function Todo() {
   };
 
   const onOut = () => {
-    contract.methods.out().send({ from: account });
+    contract.methods
+      .out()
+      .send({ from: account })
+      .once("receipt", () => {
+        window.location.reload();
+      });
   };
 
   const onApprove = () => {

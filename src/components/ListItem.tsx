@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toBN } from "web3-utils";
-import useContract, { TOKEN_ADDRESS } from "../hooks/useContract";
+import useContract from "../hooks/useContract";
 import useInput from "../hooks/useInput";
 import { TodosS } from "./Todo";
 
@@ -30,7 +30,7 @@ export default function ListItem(todo: { isApprove: boolean } & TodosS) {
 
   const onRemove = (id: string) => {
     if (!todo.isApprove) return;
-    contract.methods.remove(TOKEN_ADDRESS, toBN(id)).send({ from: account });
+    contract.methods.remove(toBN(id)).send({ from: account });
   };
 
   const processedTime = (prevTime: string) => {

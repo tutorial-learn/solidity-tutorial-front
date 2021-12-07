@@ -55,7 +55,7 @@ export default function Main() {
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
-      {isJoin ? <Todo /> : <Join onJoin={onJoin} />}
+      {isJoin ? <Todo isJoin={isJoin} /> : <Join onJoin={onJoin} />}
     </div>
   );
 }
